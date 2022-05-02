@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-k8s-sampleaks
+  labels:
+    name: springboot-k8s-sampleaks
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: springboot-k8s-sampleaks
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-k8s-sampleaks
+spec:
+  selector:
+    matchLabels:
+      app: springboot-k8s-sampleaks
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: springboot-k8s-sampleaks
+    spec:
+      containers:
+        - name: springboot-k8s-sampleaks
+          image: pavanbhagathi1234/smapleaks:v1
+          ports:
+            - containerPort: 8080
+
+    kubernatesaks
